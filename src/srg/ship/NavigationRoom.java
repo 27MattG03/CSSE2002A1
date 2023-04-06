@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NavigationRoom extends Room{
-    private List<SpacePort> galaxyMap;
-    public SpacePort currentPort;
+    public List<SpacePort> galaxyMap;
+    private SpacePort currentPort;
     public NavigationRoom(RoomTier roomTier, List<SpacePort> galaxyMap) {
         this.tier = roomTier;
         this.galaxyMap = galaxyMap;

@@ -8,8 +8,8 @@ import srg.ports.SpacePort;
 import java.util.List;
 
 public class Game {
-    private List<SpacePort> ports;
-    private Ship ship;
+    public List<SpacePort> ports;
+    public Ship ship;
 
     public Game() {
 
