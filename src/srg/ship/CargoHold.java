@@ -3,7 +3,7 @@ import srg.exceptions.InsufficientResourcesException;
 import srg.resources.FuelContainer;
 import srg.resources.FuelGrade;
 import srg.resources.ResourceContainer;
-import srg.exceptions.InsufficientCapcaityException;
+import srg.exceptions.InsufficientCapacityException;
 import srg.resources.ResourceType;
 
 import java.util.ArrayList;
@@ -18,10 +18,20 @@ public class CargoHold extends Room {
 
     private int capacity;
     private List<ResourceContainer> resources = new ArrayList<ResourceContainer>();
+
+    /**
+     * Constructs a cargo hold of a certain room tier.
+     * @param tier
+     */
     public CargoHold(RoomTier tier) {
         super(tier);
         this.capacity = getMaximumCapacity();
     }
+
+    /**
+     *
+     * @return The maximum capacity of a CargoHold based on its Tier
+     */
     public int getMaximumCapacity() {
         switch (this.getTier()){
             case BASIC :
@@ -34,21 +44,42 @@ public class CargoHold extends Room {
                 return 0;
         }
     }
-    public int getRemainingCapacity() {
 
+    /**
+     *
+     * @return The remaining capacity of a CargoHold object.
+     */
+    public int getRemainingCapacity() {
         return this.capacity;
     }
+
+    /**
+     *
+     * @return A list of the resource containers stored in a CargoHold.
+     */
     public List<ResourceContainer> getResources(){
         return resources;
     }
-    public void storeResource(ResourceContainer resource) throws InsufficientCapcaityException {
+
+    /**
+     * Store a resource container in the CargoHold
+     * @param resource the resource container.
+     * @throws InsufficientCapacityException if there is no room for this resource.
+     */
+    public void storeResource(ResourceContainer resource) throws InsufficientCapacityException {
         if (this.resources.size() < getMaximumCapacity()) {
             this.resources.add(resource);
         }
         else {
-            throw new InsufficientCapcaityException();
+            throw new InsufficientCapacityException();
         }
     }
+
+    /**
+     * Find the containers with a specific type of Resource
+     * @param type The ResourceType to be found
+     * @return A list of ResourceContainers with this type of Resource
+     */
     public List<ResourceContainer> getResourceByType(ResourceType type){
         List<ResourceContainer> resourcesByType = new ArrayList<ResourceContainer>();
         for (ResourceContainer container: this.resources) {
@@ -59,6 +90,12 @@ public class CargoHold extends Room {
         }
         return resourcesByType;
     }
+
+    /**
+     * Find the containers with a specific grade of Fuel
+     * @param grade The grade to be found.
+     * @return A list of ResourceContainers with this grade of Fuel
+     */
     public List<ResourceContainer> getResourceByType(FuelGrade grade){
         List<ResourceContainer> fuelContainers = getResourceByType(ResourceType.FUEL);
         List<ResourceContainer> resourcesByType = new ArrayList<ResourceContainer>();
@@ -70,6 +107,12 @@ public class CargoHold extends Room {
         }
         return resourcesByType;
     }
+
+    /**
+     *
+     * @param type
+     * @return The total amount of a ResourceType in the CargoHold
+     */
     public int getTotalAmountByType(ResourceType type) {
         List<ResourceContainer> resourceContainers = getResourceByType(type);
         int count = 0;
@@ -78,6 +121,12 @@ public class CargoHold extends Room {
         }
         return count;
     }
+
+    /**
+     *
+     * @param grade
+     * @return The total amount of a FuelGrade in the CargoHold
+     */
     public int getTotalAmountByType(FuelGrade grade) {
         List<ResourceContainer> fuelContainers = getResourceByType(grade);
         int count = 0;
@@ -86,6 +135,13 @@ public class CargoHold extends Room {
         }
         return count;
     }
+
+    /**
+     * Consume a specific non-fuel resource.
+     * @param type The type of resource to be consumed
+     * @param amount The amount of resource to be consumed
+     * @throws InsufficientResourcesException
+     */
     public void consumeResource(ResourceType type,
                                 int amount)
             throws InsufficientResourcesException {
@@ -113,6 +169,13 @@ public class CargoHold extends Room {
         }
 
     }
+
+    /**
+     * Consume a specific fuel grade from the CargoHold
+     * @param grade The grade of fuel to be consumed.
+     * @param amount The amount of resource to be consumed.
+     * @throws InsufficientResourcesException
+     */
     public void consumeResource(FuelGrade grade,
                                 int amount)
             throws InsufficientResourcesException {

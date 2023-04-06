@@ -32,28 +32,18 @@ public class NavigationRoom extends Room{
         return inFly;
     }
     public int getMaximumFlyDistance(){
-        switch(this.tier) {
-            case BASIC:
-                return 200;
-            case AVERAGE:
-                return 400;
-            case PRIME:
-                return 600;
-            default:
-                return -1;
-        }
+        return switch (this.tier) {
+            case BASIC -> 200;
+            case AVERAGE -> 400;
+            case PRIME -> 600;
+        };
     }
     public int getMaximumJumpDistance(){
-        switch(this.tier) {
-            case BASIC:
-                return 500;
-            case AVERAGE:
-                return 750;
-            case PRIME:
-                return 1000;
-            default:
-                return -1;
-        }
+        return switch (this.tier) {
+            case BASIC -> 500;
+            case AVERAGE -> 750;
+            case PRIME -> 1000;
+        };
     }
     public List<SpacePort> getPortsInJumpRange(){
         List<SpacePort> inJump = new ArrayList<>();
@@ -70,7 +60,7 @@ public class NavigationRoom extends Room{
         List<SpacePort> inFly = getPortsInJumpRange();
         List<SpacePort> inJump = getPortsInJumpRange();
         for (SpacePort port: inFly){
-            actions.add(String.format("fly to \"%s\": %s at %s [COST: %i TRITIUM FUEL",port.getName(),
+            actions.add(String.format("fly to \"%s\": %s at %s [COST: %i TRITIUM FUEL]",port.getName(),
                     port.getClass().getName(), port.getPosition().toString(), getFuelNeeded(port)));
         }
         for (SpacePort port: inJump){
@@ -82,7 +72,6 @@ public class NavigationRoom extends Room{
         return port.getPosition().distanceTo(currentPort.getPosition());
     }
     public ShipYard getShipYard(){
-        ShipYard shipYard;
         if (this.currentPort instanceof ShipYard){
             return (ShipYard) this.currentPort;
         }
@@ -138,7 +127,7 @@ public class NavigationRoom extends Room{
             throws NoPathException {
         SpacePort portFromName = null;
         for (SpacePort port : this.galaxyMap) {
-            if (port.getName() == name){
+            if (port.getName().equals(name)){
                 portFromName = port;
             }
         }

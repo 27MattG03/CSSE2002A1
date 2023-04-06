@@ -28,6 +28,10 @@ public class ShipYard extends SpacePort{
        }
     }
 
+    /**
+     *
+     * @return a list of actions this shipyard can perform
+     */
     @Override
     public List<String> getActions() {
         Iterator<String> iter = canUpgrade.iterator();
