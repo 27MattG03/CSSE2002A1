@@ -1,6 +1,6 @@
 package srg.ports;
 
-import srg.exceptions.InsufficientCapacityException;
+import srg.exceptions.InsufficientCapcaityException;
 import srg.exceptions.InsufficientResourcesException;
 import srg.resources.FuelContainer;
 import srg.resources.FuelGrade;
@@ -27,7 +27,7 @@ public class Store extends SpacePort {
             cargoHold.storeResource(new ResourceContainer(ResourceType.REPAIR_KIT, MAX_REPAIR_KIT));
             cargoHold.storeResource(new FuelContainer(FuelGrade.TRITIUM,MAX_FUEL));
             cargoHold.storeResource(new FuelContainer(FuelGrade.HYPERDRIVE_CORE,MAX_FUEL));
-        } catch (InsufficientCapacityException error){
+        } catch (InsufficientCapcaityException error){
 
         }
     }

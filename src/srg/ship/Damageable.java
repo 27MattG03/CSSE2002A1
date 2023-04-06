@@ -20,7 +20,7 @@ public interface Damageable {
      * @return True if broken False otherwise.
      */
     default boolean isBroken(){
-        if (getHealth() <= 0D{
+        if (getHealth() <= 0){
             return true;
         } else {
             return false;

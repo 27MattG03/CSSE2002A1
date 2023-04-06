@@ -3,7 +3,7 @@ import srg.exceptions.InsufficientResourcesException;
 import srg.resources.FuelContainer;
 import srg.resources.FuelGrade;
 import srg.resources.ResourceContainer;
-import srg.exceptions.InsufficientCapacityException;
+import srg.exceptions.InsufficientCapcaityException;
 import srg.resources.ResourceType;
 
 import java.util.ArrayList;
@@ -64,14 +64,14 @@ public class CargoHold extends Room {
     /**
      * Store a resource container in the CargoHold
      * @param resource the resource container.
-     * @throws InsufficientCapacityException if there is no room for this resource.
+     * @throws InsufficientCapcaityException if there is no room for this resource.
      */
-    public void storeResource(ResourceContainer resource) throws InsufficientCapacityException {
+    public void storeResource(ResourceContainer resource) throws InsufficientCapcaityException {
         if (this.resources.size() < getMaximumCapacity()) {
             this.resources.add(resource);
         }
         else {
-            throw new InsufficientCapacityException();
+            throw new InsufficientCapcaityException();
         }
     }
 
