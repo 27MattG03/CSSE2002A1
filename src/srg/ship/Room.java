@@ -18,7 +18,7 @@ public class Room extends Object implements Damageable {
         this.name = "Room";
         this.tier = tier;
         this.damageRate = tier.damageMultiplier*DAMAGE_RATE;
-        this.maxHealth = HEALTH_MULTIPLIER*tier.healthMultiplier*2;
+        this.maxHealth = HEALTH_MULTIPLIER*tier.healthMultiplier;
         this.health = this.maxHealth;
 
 
