@@ -66,7 +66,7 @@ public class ResourceContainer extends Object{
      */
     @Override
     public String toString() {
-        return String.format("%s: %i",this.type.toString(), this.amount);
+        return String.format("%s: %s",this.type.toString(), this.amount);
     }
 
     /**

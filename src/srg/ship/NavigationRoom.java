@@ -10,66 +10,75 @@ import srg.resources.FuelGrade;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NavigationRoom extends Room{
+/**
+ * A class representing the navigation room on a ship.
+ */
+public class NavigationRoom extends Room {
+    /**
+     * This NavigationRoom's galaxy map
+     */
     public List<SpacePort> galaxyMap;
+    /**
+     * The current port of the ship.
+     */
     private SpacePort currentPort;
 
     /**
      * Constructs a NavigationRoom of a certain tier and a specific galaxy map.
-     * @param roomTier
-     * @param galaxyMap
+     * @param roomTier The tier of the navigation room
+     * @param galaxyMap The galaxy map of this navigation room.
      */
     public NavigationRoom(RoomTier roomTier, List<SpacePort> galaxyMap) {
         this.tier = roomTier;
         this.galaxyMap = galaxyMap;
         this.currentPort = galaxyMap.get(0);
     }
-    public SpacePort getCurrentPort(){
+    public SpacePort getCurrentPort() {
         return this.currentPort;
     }
-    public List<SpacePort> getPortsInFlyRange(){
+    public List<SpacePort> getPortsInFlyRange() {
         List<SpacePort> inFly = new ArrayList<>();
         for (SpacePort port : this.galaxyMap) {
             int dist = port.getPosition().distanceTo(currentPort.getPosition());
-            if ( dist <= getMaximumFlyDistance() && dist > 0){
+            if (dist <= getMaximumFlyDistance() && dist > 0) {
                 inFly.add(port);
             }
         }
         return inFly;
     }
-    public int getMaximumFlyDistance(){
+    public int getMaximumFlyDistance() {
         return switch (this.tier) {
             case BASIC -> 200;
             case AVERAGE -> 400;
             case PRIME -> 600;
         };
     }
-    public int getMaximumJumpDistance(){
+    public int getMaximumJumpDistance() {
         return switch (this.tier) {
             case BASIC -> 500;
             case AVERAGE -> 750;
             case PRIME -> 1000;
         };
     }
-    public List<SpacePort> getPortsInJumpRange(){
+    public List<SpacePort> getPortsInJumpRange() {
         List<SpacePort> inJump = new ArrayList<>();
         for (SpacePort port : this.galaxyMap) {
             int dist = port.getPosition().distanceTo(currentPort.getPosition());
-            if ( dist <= getMaximumJumpDistance() && dist > 0){
+            if ( dist <= getMaximumJumpDistance() && dist > 0) {
                 inJump.add(port);
             }
         }
         return inJump;
     }
-    public List<String> getActions(){
+    public List<String> getActions() {
         List<String> actions = new ArrayList<String>();
         List<SpacePort> inFly = getPortsInJumpRange();
         List<SpacePort> inJump = getPortsInJumpRange();
-        for (SpacePort port: inFly){
-            actions.add(String.format("fly to \"%s\": %s at %s [COST: %i TRITIUM FUEL]",port.getName(),
+        for (SpacePort port: inFly) {
+            actions.add(String.format("fly to \"%s\": %s at %s [COST: %s TRITIUM FUEL]",port.getName(),
                     port.getClass().getName(), port.getPosition().toString(), getFuelNeeded(port)));
         }
-        for (SpacePort port: inJump){
+        for (SpacePort port: inJump) {
             actions.add(String.format("jump to \"%s\" [COST: 1 HYPERDRIVE CORE]", port.getName()));
         }
         return actions;
@@ -77,11 +86,10 @@ public class NavigationRoom extends Room{
     public int getFuelNeeded(SpacePort port) {
         return port.getPosition().distanceTo(currentPort.getPosition());
     }
-    public ShipYard getShipYard(){
-        if (this.currentPort instanceof ShipYard){
+    public ShipYard getShipYard() {
+        if (this.currentPort instanceof ShipYard) {
             return (ShipYard) this.currentPort;
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -89,23 +97,30 @@ public class NavigationRoom extends Room{
         Store shipYard;
         if (this.currentPort instanceof Store) {
             return (Store) this.currentPort;
-        }
-        else {
+        } else {
             return null;
         }
     }
+
+    /**
+     * Fly's the ship to a different port.
+     * @param portName The port to fly to
+     * @param cargoHold The CargoHold of this ship.
+     * @throws InsufficientResourcesException If not enough fuel
+     * @throws NoPathException If port not in range or non-existant.
+     */
     public void flyTo(String portName,
                       CargoHold cargoHold)
             throws InsufficientResourcesException,
             NoPathException {
         SpacePort desiredPort = getSpacePortFromName(portName);
         SpacePort inRangePort = null;
-        for (SpacePort port : getPortsInFlyRange()){
-            if (port == desiredPort){
+        for (SpacePort port : getPortsInFlyRange()) {
+            if (port == desiredPort) {
                 inRangePort = desiredPort;
             }
         }
-        if (inRangePort == null){
+        if (inRangePort == null) {
             throw new NoPathException();
         }
         int required  = getFuelNeeded(desiredPort);
@@ -118,8 +133,8 @@ public class NavigationRoom extends Room{
             NoPathException {
         SpacePort desiredPort = getSpacePortFromName(portName);
         SpacePort inRangePort = null;
-        for (SpacePort port : getPortsInJumpRange()){
-            if (port == desiredPort){
+        for (SpacePort port : getPortsInJumpRange()) {
+            if (port == desiredPort) {
                 inRangePort = desiredPort;
             }
         }

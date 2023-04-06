@@ -10,10 +10,18 @@ public class Room extends Object implements Damageable {
     private int maxHealth;
     protected RoomTier tier;
     private String name;
+    /**
+     * Constructs a room of Tier BASIC
+     */
     public Room() {
         this(RoomTier.BASIC);
 
     }
+
+    /**
+     * Constructs a room of a certain tier.
+     * @param tier
+     */
     public Room(RoomTier tier) {
         this.name = "Room";
         this.tier = tier;
@@ -24,8 +32,6 @@ public class Room extends Object implements Damageable {
 
 
     }
-
-
     @Override
     public void damage() {
         this.health = this.health - damageRate;
