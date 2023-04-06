@@ -1,16 +1,19 @@
 package srg.exceptions;
 
-public class InsufficientCapcaityException extends Exception{
+/**
+ * An exception raised when there is insufficient capacity for a resource.
+ */
+public class InsufficientCapcaityException extends Exception {
     /**
-     *
+     * Constructs an InsufficientCapcaityException.
      */
     public InsufficientCapcaityException() {
         super();
     }
 
     /**
-     *
-     * @param s
+     * Constructs an InsufficientCapcaityException.
+     * @param s The exception message.
      */
     public InsufficientCapcaityException(String s) {
         super(s);

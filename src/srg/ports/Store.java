@@ -9,9 +9,21 @@ import srg.resources.ResourceType;
 import srg.ship.CargoHold;
 import srg.ship.RoomTier;
 
+/**
+ * A class representing a space port that is a store.
+ */
 public class Store extends SpacePort {
-    private final int MAX_FUEL = 1000;
-    private final int MAX_REPAIR_KIT = 10;
+    /**
+     * Maximum capacity of a fuel container.
+     */
+    private final int maxFuel = 1000;
+    /**
+     * The maximum capacity of a resource container.
+     */
+    private final int maxRepairKit = 10;
+    /**
+     * The cargohold of this store.
+     */
     private CargoHold cargoHold = new CargoHold(RoomTier.AVERAGE);
 
     /**
@@ -24,11 +36,11 @@ public class Store extends SpacePort {
         super(name, position);
 
         try {
-            cargoHold.storeResource(new ResourceContainer(ResourceType.REPAIR_KIT, MAX_REPAIR_KIT));
-            cargoHold.storeResource(new FuelContainer(FuelGrade.TRITIUM,MAX_FUEL));
-            cargoHold.storeResource(new FuelContainer(FuelGrade.HYPERDRIVE_CORE,MAX_FUEL));
-        } catch (InsufficientCapcaityException error){
-
+            cargoHold.storeResource(new ResourceContainer(ResourceType.REPAIR_KIT, maxRepairKit));
+            cargoHold.storeResource(new FuelContainer(FuelGrade.TRITIUM, maxFuel));
+            cargoHold.storeResource(new FuelContainer(FuelGrade.HYPERDRIVE_CORE, maxFuel));
+        } catch (InsufficientCapcaityException error) {
+            error.getMessage();
         }
     }
 
@@ -42,7 +54,7 @@ public class Store extends SpacePort {
     public ResourceContainer purchase(String item,
                                       int amount)
             throws InsufficientResourcesException {
-       return new ResourceContainer(ResourceType.REPAIR_KIT, amount);
+        return new ResourceContainer(ResourceType.REPAIR_KIT, amount);
     }
 
 

@@ -16,17 +16,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a spaceship, which has a unique name, a unique ID, a registered owner, a CargoHold and a NavigationRoom.
+ * Represents a spaceship, which has a unique name,
+ * a unique ID, a registered owner, a CargoHold and a NavigationRoom.
  * @version 1.0
  * @ass1
  */
 public class Ship {
+    /**
+     * The name of the ship
+     */
     private String name;
+    /**
+     * The owner of the ship
+     */
     private String owner;
+    /**
+     * The ships unique id.
+     */
     private String id;
+    /**
+     * The ships cargoHold
+     */
     private CargoHold cargoHold;
+    /**
+     * The ships NavigationRoom.
+     */
     private NavigationRoom navigationRoom;
 
+    /**
+     * Constructs a ship with resource containers of each resource type
+     * @param name The name of the ship.
+     * @param owner The owner of the ship
+     * @param id The unique id of the ship.
+     * @param cargoHoldTier The room tier of the cargo hold.
+     * @param navigationRoomTier The room tier of the navigation room.
+     * @param galaxyMap The galaxy map for the navigation room.
+     */
     public Ship(String name,
                 String owner,
                 String id,
@@ -37,16 +62,16 @@ public class Ship {
         this.owner = owner;
         this.id = id;
         this.cargoHold = new CargoHold(cargoHoldTier);
-        this.navigationRoom = new NavigationRoom(navigationRoomTier,galaxyMap);
+        this.navigationRoom = new NavigationRoom(navigationRoomTier, galaxyMap);
         try {
             cargoHold.storeResource(new ResourceContainer(ResourceType.REPAIR_KIT, 5));
-            cargoHold.storeResource(new FuelContainer(FuelGrade.TRITIUM,100));
-            cargoHold.storeResource(new FuelContainer(FuelGrade.HYPERDRIVE_CORE,5));
-        } catch (InsufficientCapcaityException | IllegalArgumentException error){
+            cargoHold.storeResource(new FuelContainer(FuelGrade.TRITIUM, 100));
+            cargoHold.storeResource(new FuelContainer(FuelGrade.HYPERDRIVE_CORE, 5));
+        } catch (InsufficientCapcaityException | IllegalArgumentException error) {
+            error.getMessage();
         }
-
-
     }
+
     /**
      * This method is provided as it interfaces with the command line interface.
      *
@@ -57,8 +82,8 @@ public class Ship {
         try {
             processCommand(ioHandler, command);
         } catch (InsufficientResourcesException error) {
-            ioHandler.writeLn("Unable to perform action due to broken component or " +
-                    "insufficient resources."
+            ioHandler.writeLn("Unable to perform action due to broken component or "
+                    + "insufficient resources."
                     + System.lineSeparator() + error.getMessage());
         } catch (IllegalArgumentException | NoPathException | InsufficientCapcaityException error) {
             ioHandler.writeLn(error.getMessage());
@@ -126,8 +151,15 @@ public class Ship {
         }
 
     }
+
+    /**
+     * Returns the Room object from its name.
+     * @param name the name to be found.
+     * @return The Room object associated with this name.
+     * @throws IllegalArgumentException If room cannot be found.
+     */
     public Room getRoomByName(String name)
-            throws IllegalArgumentException{
+            throws IllegalArgumentException {
         switch (name) {
             case "NavigationRoom":
                 return this.navigationRoom;
@@ -138,8 +170,21 @@ public class Ship {
                 throw new IllegalArgumentException();
         }
     }
-    public List<String> getActions(){
+
+    /**
+     * Gets a list of actions that can be completed by the navigation room and cargo hold.
+     * @return A list of actions.
+     */
+    public List<String> getActions() {
         List<String> actions = new ArrayList<String>();
         return actions;
+    }
+
+    /**
+     * Gets a string representation of the ship
+     * @return A string representation of the ship.
+     */
+    public String toString() {
+        return "Hello World!";
     }
 }
