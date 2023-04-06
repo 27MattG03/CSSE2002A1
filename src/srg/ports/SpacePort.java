@@ -10,6 +10,7 @@ public class SpacePort extends Object {
 
 
 
+
     public SpacePort(String name, Position position){
         this.name = name;
         this.position = position;
@@ -20,7 +21,7 @@ public class SpacePort extends Object {
     @Override
     public String toString() {
 
-        return String.format("PORT: \"%s\" %s at %s", name,this.getClass().getName(), position.toString());
+        return String.format("PORT: \"%s\" %s at %s", name,this.getClass().getSimpleName(), position.toString());
     }
     public List<String> getActions() {
         List<String> actions = new ArrayList<String>();
@@ -30,4 +31,3 @@ public class SpacePort extends Object {
         return this.position;
     }
 }
-

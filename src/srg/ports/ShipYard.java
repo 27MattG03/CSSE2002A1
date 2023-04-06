@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ShipYard extends SpacePort{
+
     private List <String> canUpgrade;
     public ShipYard(String name, Position position, List<String> canUpgrade) {
         super(name, position);
@@ -16,7 +17,7 @@ public class ShipYard extends SpacePort{
     public void upgrade(Room room) {
         boolean in = false;
        for (String type : canUpgrade) {
-           if (type.equals(room.getClass().getName())) {
+           if (type.equals(room.getClass().getSimpleName())) {
                in = true;
            }
        }
