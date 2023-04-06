@@ -11,7 +11,7 @@ public class ResourceContainer extends Object{
      * @param amount The amount of this Resource to be stored (Precondition: The amount ot be Stored is less than
      *               the Maximum Capacity).
      */
-    public ResourceContainer(ResourceType type, int amount) {
+    public ResourceContainer(ResourceType type, int amount) throws IllegalArgumentException {
         this.amount = amount;
         if (!canStore(type)) {
             throw new IllegalArgumentException();
