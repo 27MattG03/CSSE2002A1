@@ -1,5 +1,6 @@
 package srg.ship;
 
+import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Room extends Object implements Damageable {
         this.name = "Room";
         this.tier = tier;
         this.damageRate = tier.damageMultiplier*DAMAGE_RATE;
-        this.maxHealth = HEALTH_MULTIPLIER*tier.healthMultiplier;
+        this.maxHealth = HEALTH_MULTIPLIER*tier.healthMultiplier*2;
         this.health = this.maxHealth;
 
 

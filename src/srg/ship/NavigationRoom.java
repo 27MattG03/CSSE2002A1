@@ -13,6 +13,12 @@ import java.util.List;
 public class NavigationRoom extends Room{
     public List<SpacePort> galaxyMap;
     private SpacePort currentPort;
+
+    /**
+     * Constructs a NavigationRoom of a certain tier and a specific galaxy map.
+     * @param roomTier
+     * @param galaxyMap
+     */
     public NavigationRoom(RoomTier roomTier, List<SpacePort> galaxyMap) {
         this.tier = roomTier;
         this.galaxyMap = galaxyMap;
