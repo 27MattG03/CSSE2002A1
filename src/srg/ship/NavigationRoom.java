@@ -138,7 +138,7 @@ public class NavigationRoom extends Room {
                 inRangePort = desiredPort;
             }
         }
-        if (inRangePort == null){
+        if (inRangePort == null) {
             throw new NoPathException();
         }
         cargoHold.consumeResource(FuelGrade.HYPERDRIVE_CORE,1);
