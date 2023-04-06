@@ -15,10 +15,12 @@ public class FuelContainer extends ResourceContainer {
     }
 
     /**
-     *
+     * Gets the fuel Grade.
      * @return The fuel grade of this container as a FuelGrade enum
      */
-    public FuelGrade getFuelGrade(){return this.grade;}
+    public FuelGrade getFuelGrade() {
+        return this.grade;
+    }
 
     /**
      * Check whether the resource type can be stored.
@@ -27,7 +29,7 @@ public class FuelContainer extends ResourceContainer {
      */
     @Override
     public boolean canStore(ResourceType type) {
-        if (type == ResourceType.FUEL){
+        if (type == ResourceType.FUEL) {
             return true;
         } else {
             return false;
@@ -35,18 +37,18 @@ public class FuelContainer extends ResourceContainer {
     }
 
     /**
-     *
+     * Gets a string rep of a Fuel Container.
      * @return A string representation of the FuelContainer object
      */
     @Override
     public String toString() {
-        return String.format("%s - %s",super.toString(),this.grade.toString());
+        return String.format("%s - %s", super.toString(), this.grade.toString());
     }
-
     /**
-     *
+     * Gets a shorter representation of a fuel container.
      * @return A shorter representation of FuelContainer i.e. the Fuel Grade it stores
      */
+
     @Override
     public String getShortName() {
         return this.grade.toString();
